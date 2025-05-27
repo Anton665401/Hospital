@@ -204,12 +204,13 @@ def delete_user(user_id):
     if not session.get('is_admin'):
         return redirect(url_for('index'))
     conn = get_db_connection()
-    cursor = conn.cursor()
-    cursor.execute('DELETE FROM users WHERE id = %s', (user_id,))
+    # ВАЖНО: сначала удалить все записи appointments для этого пользователя!
+    conn.execute('DELETE FROM appointments WHERE user_id = ?', (user_id,))
+    # Потом удалить самого пользователя
+    conn.execute('DELETE FROM users WHERE id = ?', (user_id,))
     conn.commit()
-    cursor.close()
     conn.close()
-    return redirect(url_for('admin_panel'))
+    return redirect(url_for('admin_panel')))
 
 @app.route('/submit_appointment', methods=['POST'])
 def submit_appointment():
