@@ -7,30 +7,38 @@ import subprocess
 from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
+app.secret_key = 'your_secret_key_here'  # Не забудьте добавить секретный ключ
 app.config['UPLOAD_FOLDER'] = os.path.join(os.path.dirname(__file__), 'uploads')
 
-# Получаем URL подключения к базе из переменной окружения
-DATABASE_URL = os.environ.get('DATABASE_URL')
-print("DATABASE_URL =", os.environ.get('DATABASE_URL'))
+# Выберите подходящую строку подключения:
+# Для Vercel:
+DATABASE_URL = os.environ.get('DATABASE_URL', "postgresql://postgres.aajwdivywgtyaksgggpq:Z665401zzzzz@aws-0-eu-central-1.pooler.supabase.com:6543/postgres")
+
+# Для локальной разработки:
+# DATABASE_URL = os.environ.get('DATABASE_URL', "postgresql://postgres:Z665401zzzzz@db.aajwdivywgtyaksgggpq.supabase.co:5432/postgres")
 
 def get_db_connection():
-    # Разбираем URL подключения
-    result = urllib.parse.urlparse(DATABASE_URL)
-    username = result.username
-    password = urllib.parse.unquote(result.password)
-    database = result.path[1:]  # убираем первый слэш
-    hostname = result.hostname
-    port = result.port
+    try:
+        result = urllib.parse.urlparse(DATABASE_URL)
+        username = result.username
+        password = urllib.parse.unquote(result.password)
+        database = result.path[1:]  # убираем первый слэш
+        hostname = result.hostname
+        port = result.port
 
-    conn = psycopg2.connect(
-        dbname=database,
-        user=username,
-        password=password,
-        host=hostname,
-        port=port,
-        cursor_factory=RealDictCursor
-    )
-    return conn
+        conn = psycopg2.connect(
+            dbname=database,
+            user=username,
+            password=password,
+            host=hostname,
+            port=port,
+            cursor_factory=RealDictCursor,
+            connect_timeout=3  # Таймаут подключения 3 секунды
+        )
+        return conn
+    except Exception as e:
+        print(f"Ошибка подключения к базе данных: {e}")
+        raise
 
 def initialize_database():
     conn = get_db_connection()
