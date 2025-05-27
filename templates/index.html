@@ -9,19 +9,25 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <style>
         .hero {
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero-content {
-            position: absolute;
-            top: 40%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            text-align: center;
-            color: #fff;
-            animation: fadeIn 2s ease-in-out;
-        }
+    background-size: cover;
+    background-position: center;
+    min-height: 400px;
+    display: flex;
+    align-items: flex-end;      /* !!! ВНИЗУ картинки !!! */
+    justify-content: center;
+    padding-bottom: 50px;       /* Настрой, чтобы было "почти внизу", можно увеличить до 80-120px */
+    position: relative;
+}
+.hero-content {
+    background: rgba(0,0,0,0.5);
+    padding: 40px 20px;
+    border-radius: 16px;
+    text-align: center;
+    color: #fff;
+    width: 100%;
+    max-width: 700px;
+    margin: 0 auto;
+}
 
         .hero-content h1 {
             font-size: 3em;
@@ -124,7 +130,7 @@
         <nav class="nav-container">
             <div class="logo-container">
                 <div class="logo-circle">
-                    <img src="{{ url_for('static', filename='images/Лого.jpg') }}" alt="Логотип медицинского центра">
+                    <img src="{{ url_for('static', filename='images/logo.jpg') }}" alt="Логотип медицинского центра">
                 </div>
                 <div class="organization-name">
                      ОГБУЗ "Черемховская  <br> городская больница №1
@@ -146,16 +152,13 @@
         </nav>
     </header>
 
-    <section class="hero">
-        <div class="hero-background">
-            <img src="{{ url_for('static', filename='images/Главная картинка.jpg') }}" alt="Медицинский центр">
-        </div>
-        <div class="hero-content" style="top: 15%;">
-            <h1>Ваше здоровье - наш приоритет</h1>
-            <h2>Профессиональная медицинская помощь с заботой о каждом пациенте</h2>
-            <a href="#specialists" class="btn btn-primary">Записаться на прием</a>
-        </div>
-    </section>
+<section class="hero" style="background-image: url('{{ url_for('static', filename='images/main_image.jpg') }}');">
+    <div class="hero-content">
+        <h1>Ваше здоровье — наш приоритет</h1>
+        <h2>Профессиональная медицинская помощь с заботой о каждом пациенте</h2>
+        <a href="#specialists" class="btn btn-primary">Записаться на прием</a>
+    </div>
+</section>
 
     <section class="centered-section">
         <div class="container" style="display: flex; flex-direction: column; align-items: center;">
@@ -167,18 +170,18 @@
         <div class="container">
             <div class="services-grid">
                 <div class="service-card">
-                    <img src="{{ url_for('static', filename='images/профилактика.jpg') }}" alt="Профилактика заболеваний">
+                    <img src="{{ url_for('static', filename='images/prevention.jpg') }}" alt="Профилактика заболеваний">
                     <h3>Профилактика заболеваний</h3>
                     <p>Регулярные медицинские осмотры помогают выявить заболевания на ранней стадии. Рекомендуется проходить профилактический осмотр не реже 1 раза в год.</p>
                 </div>
                 <div class="service-card">
-                    <img src="{{ url_for('static', filename='images/Здоровый_образ.jpg') }}" alt="Здоровый образ жизни">
+                    <img src="{{ url_for('static', filename='images/healthy_lifestyle.jpg') }}" alt="Здоровый образ жизни">
                     <h3>Здоровый образ жизни</h3>
                     <p>Правильное питание, регулярные физические нагрузки и отказ от вредных привычек - ключ к долгой и здоровой жизни.</p>
                     <a href="services.html" class="btn btn-primary btn-more">Узнать больше</a>
                 </div>
                 <div class="service-card">
-                    <img src="{{ url_for('static', filename='images/вакцинация.jpg') }}" alt="Вакцинация">
+                    <img src="{{ url_for('static', filename='images/vaccination.jpg') }}" alt="Вакцинация">
                     <h3>Вакцинация</h3>
                     <p>Вакцинация - эффективный способ защиты от инфекционных заболеваний. Узнайте больше о доступных вакцинах и запишитесь на прием.</p>
                 </div>
@@ -192,7 +195,7 @@
             <div class="specialists-grid">
                 <div class="specialist-card">
                     <div class="specialist-image">
-                        <img src="{{ url_for('static', filename='images/Терапевт.jpg') }}" alt="Терапевт">
+                        <img src="{{ url_for('static', filename='images/therapist.jpg') }}" alt="Терапевт">
                     </div>
                     <h3>Терапевт</h3>
                     <p>Иванов Иван Иванович</p>
@@ -201,7 +204,7 @@
                 </div>
                 <div class="specialist-card">
                     <div class="specialist-image">
-                        <img src="{{ url_for('static', filename='images/Кардиолог.jpg') }}" alt="Кардиолог">
+                        <img src="{{ url_for('static', filename='images/cardiologist.jpg') }}" alt="Кардиолог">
                     </div>
                     <h3>Кардиолог</h3>
                     <p>Петров Петр Петрович</p>
@@ -210,7 +213,7 @@
                 </div>
                 <div class="specialist-card">
                     <div class="specialist-image">
-                        <img src="{{ url_for('static', filename='images/Невролог.jpg') }}" alt="Невролог">
+                        <img src="{{ url_for('static', filename='images/neurologist.jpg') }}" alt="Невролог">
                     </div>
                     <h3>Невролог</h3>
                     <p>Сидоров Сидор Сидорович</p>
@@ -219,7 +222,7 @@
                 </div>
                 <a href="other-doctors.html" class="specialist-card">
                     <div class="specialist-image">
-                        <img src="/static/images/Другие.jpg" alt="Другие специалисты">
+                        <img src="/static/images/other.jpg" alt="Другие специалисты">
                     </div>
                     <h3>Другие специалисты</h3>
                     <p>Записаться к другим врачам нашего центра</p>
