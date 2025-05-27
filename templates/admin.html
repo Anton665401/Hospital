@@ -58,6 +58,67 @@
             background-color: #4CAF50;
             color: white;
         }
+        @media (max-width: 800px) {
+    table, thead, tbody, th, td, tr {
+        display: block;
+        width: 100%;
+    }
+    thead tr {
+        display: none;
+    }
+    tbody tr {
+        margin-bottom: 20px;
+        border-bottom: 2px solid #4CAF50;
+    }
+    td {
+        border: none;
+        position: relative;
+        padding-left: 50%;
+        min-height: 35px;
+        font-size: 0.97em;
+        box-sizing: border-box;
+    }
+    td:before {
+        position: absolute;
+        top: 8px;
+        left: 12px;
+        width: 48%;
+        white-space: pre-wrap;
+        font-weight: bold;
+        color: #4CAF50;
+        font-size: 0.98em;
+        content: attr(data-label);
+    }
+    /* Уменьшаем шрифты для кнопок */
+    button, .logout-button {
+        font-size: 0.96em !important;
+        padding: 7px 13px !important;
+    }
+    .binary-text {
+        font-size: 2rem;
+    }
+    .loading-screen video {
+        width: 100%;
+        max-width: 98vw;
+    }
+    .loading-bar {
+        width: 95vw;
+        max-width: 100vw;
+        height: 14px;
+    }
+}
+
+@media (max-width: 500px) {
+    .binary-text {
+        font-size: 1.2rem;
+    }
+    h2, .logout-button {
+        font-size: 1em;
+    }
+    body {
+        font-size: 0.95em;
+    }
+}
     </style>
 </head>
 <body class="admin-panel">
