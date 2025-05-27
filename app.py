@@ -210,7 +210,7 @@ def delete_user(user_id):
     conn.execute('DELETE FROM users WHERE id = ?', (user_id,))
     conn.commit()
     conn.close()
-    return redirect(url_for('admin_panel')))
+    return redirect(url_for('admin_panel'))
 
 @app.route('/submit_appointment', methods=['POST'])
 def submit_appointment():
