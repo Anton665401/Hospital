@@ -6,12 +6,13 @@ from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'
-app.config['UPLOAD_FOLDER'] = os.path.join(os.path.dirname(__file__), 'uploads')
 
-db_path = os.path.join(os.path.dirname(__file__), 'USERS', 'users.db')
-
-# Ensure the USERS directory exists
-os.makedirs(os.path.join(os.path.dirname(__file__), 'USERS'), exist_ok=True)
+# Используем временную директорию /tmp для Vercel
+app.config['UPLOAD_FOLDER'] = '/tmp/uploads'
+db_dir = '/tmp/USERS'
+os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
+os.makedirs(db_dir, exist_ok=True)
+db_path = os.path.join(db_dir, 'users.db')
 
 def initialize_database():
     conn = sqlite3.connect(db_path)
@@ -303,10 +304,6 @@ def services_html():
 # Helper function to check allowed file extensions
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in {'mp4', 'avi', 'mov', 'mkv'}
-
-# Ensure the upload folder exists
-if not os.path.exists(app.config['UPLOAD_FOLDER']):
-    os.makedirs(app.config['UPLOAD_FOLDER'])
 
 if __name__ == '__main__':
     app.run()
