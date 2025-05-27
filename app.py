@@ -7,7 +7,6 @@ import subprocess
 from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
-app.secret_key = 'your_secret_key'
 app.config['UPLOAD_FOLDER'] = os.path.join(os.path.dirname(__file__), 'uploads')
 
 # Получаем URL подключения к базе из переменной окружения
