@@ -9,7 +9,6 @@ app = Flask(__name__)
 app.secret_key = 'your_secret_key'
 app.config['UPLOAD_FOLDER'] = '/tmp/uploads'
 
-# Получаем URL подключения к базе из переменной окружения
 DATABASE_URL = os.environ.get('DATABASE_URL')
 
 def get_db_connection():
@@ -204,11 +203,9 @@ def delete_selected_appointments():
     appointment_ids = request.json.get('appointmentIds', [])
     if not appointment_ids or not isinstance(appointment_ids, list):
         return jsonify({'status': 'error', 'message': 'No appointment IDs provided'})
-
     conn = get_db_connection()
     cursor = conn.cursor()
     try:
-        # Можно оптимизировать удаление одной командой, но оставлю по твоему методу
         for appointment_id in appointment_ids:
             cursor.execute('DELETE FROM appointments WHERE id = %s', (appointment_id,))
         conn.commit()
@@ -219,7 +216,6 @@ def delete_selected_appointments():
         cursor.close()
         conn.close()
     return jsonify({'status': 'success'})
-
 
 @app.route('/submit_appointment', methods=['POST'])
 def submit_appointment():
@@ -298,25 +294,6 @@ def clear_all_appointments():
     cursor.close()
     conn.close()
     return redirect(url_for('admin_panel'))
-
-@app.route('/delete_selected_appointments', methods=['POST'])
-def delete_selected_appointments():
-    appointment_ids = request.json.get('appointmentIds', [])
-    if not appointment_ids:
-        return jsonify({'status': 'error', 'message': 'No appointment IDs provided'})
-    conn = get_db_connection()
-    cursor = conn.cursor()
-    try:
-        for appointment_id in appointment_ids:
-            cursor.execute('DELETE FROM appointments WHERE id = %s', (appointment_id,))
-        conn.commit()
-    except Exception as e:
-        conn.rollback()
-        return jsonify({'status': 'error', 'message': str(e)})
-    finally:
-        cursor.close()
-        conn.close()
-    return jsonify({'status': 'success'})
 
 @app.route('/upload_video', methods=['POST'])
 def upload_video():
