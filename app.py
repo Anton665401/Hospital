@@ -11,7 +11,7 @@ app.config['UPLOAD_FOLDER'] = os.path.join(os.path.dirname(__file__), 'uploads')
 
 # Получаем URL подключения к базе из переменной окружения
 DATABASE_URL = os.environ.get('DATABASE_URL')
-
+print("DATABASE_URL =", os.environ.get('DATABASE_URL'))
 
 def get_db_connection():
     # Разбираем URL подключения
