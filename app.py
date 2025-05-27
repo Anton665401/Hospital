@@ -199,18 +199,27 @@ def consultation():
     email = session.get('email', '')
     return render_template('consultation.html', full_name=full_name, phone=phone, email=email)
 
-@app.route('/delete_user/<int:user_id>', methods=['POST'])
-def delete_user(user_id):
-    if not session.get('is_admin'):
-        return redirect(url_for('index'))
+@app.route('/delete_selected_appointments', methods=['POST'])
+def delete_selected_appointments():
+    appointment_ids = request.json.get('appointmentIds', [])
+    if not appointment_ids or not isinstance(appointment_ids, list):
+        return jsonify({'status': 'error', 'message': 'No appointment IDs provided'})
+
     conn = get_db_connection()
-    # ВАЖНО: сначала удалить все записи appointments для этого пользователя!
-    conn.execute('DELETE FROM appointments WHERE user_id = ?', (user_id,))
-    # Потом удалить самого пользователя
-    conn.execute('DELETE FROM users WHERE id = ?', (user_id,))
-    conn.commit()
-    conn.close()
-    return redirect(url_for('admin_panel'))
+    cursor = conn.cursor()
+    try:
+        # Можно оптимизировать удаление одной командой, но оставлю по твоему методу
+        for appointment_id in appointment_ids:
+            cursor.execute('DELETE FROM appointments WHERE id = %s', (appointment_id,))
+        conn.commit()
+    except Exception as e:
+        conn.rollback()
+        return jsonify({'status': 'error', 'message': str(e)})
+    finally:
+        cursor.close()
+        conn.close()
+    return jsonify({'status': 'success'})
+
 
 @app.route('/submit_appointment', methods=['POST'])
 def submit_appointment():
