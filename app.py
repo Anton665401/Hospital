@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, session, send_from_directory, jsonify
 import os
-import subprocess
+import urllib.parse
 import psycopg2
 from psycopg2.extras import RealDictCursor
 from werkzeug.utils import secure_filename
@@ -12,11 +12,25 @@ app.secret_key = 'your_secret_key'
 app.config['UPLOAD_FOLDER'] = '/tmp/uploads'
 os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 
-# Получаем URL подключения к базе из переменной окружения (укажи в Vercel)
+# Получаем URL подключения к базе из переменной окружения (укажи в Vercel или в системе)
 DATABASE_URL = os.environ.get('DATABASE_URL')
 
 def get_db_connection():
-    conn = psycopg2.connect(DATABASE_URL, cursor_factory=RealDictCursor)
+    result = urllib.parse.urlparse(DATABASE_URL)
+    username = result.username
+    password = result.password
+    database = result.path[1:]  # отрезаем первый слэш
+    hostname = result.hostname
+    port = result.port
+
+    conn = psycopg2.connect(
+        dbname=database,
+        user=username,
+        password=password,
+        host=hostname,
+        port=port,
+        cursor_factory=RealDictCursor
+    )
     return conn
 
 def initialize_database():
@@ -127,7 +141,7 @@ def logout():
     session.clear()
     return redirect(url_for('login'))
 
-# Добавляй остальные маршруты по аналогии с get_db_connection() и cursor.execute() с %s
+# Здесь можешь добавить остальные маршруты по аналогии
 
 if __name__ == '__main__':
     app.run()
