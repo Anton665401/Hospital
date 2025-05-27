@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Другие специалисты - Медицинский центр</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+    <nav class="nav-container">
+        <div class="logo-container">
+            <!-- Делаем логотип кликабельным -->
+            <a href="index.html" class="logo-link">
+                <div class="logo-circle">
+                    <img src="{{ url_for('static', filename='images/Лого.jpg') }}" alt="Логотип медицинского центра">
+                </div>
+            </a>
+            <div class="organization-name">
+                ОГБУЗ "Черемховская  <br> городская больница №1
+            </div>
+        </div>
+        <div class="nav-menu">
+            {% if username %}
+                <span class="nav-link">Пользователь: {{ username }}</span>
+                <a href="/logout" class="nav-link">Выйти</a>
+            {% else %}
+                <a href="/login" class="auth-link">Вход</a>
+                <a href="/register" class="auth-link">Регистрация</a>
+            {% endif %}
+        </div>
+    </nav>
+</header>
+
+    <section class="section doctors-page">
+        <div class="container">
+            <h1>Другие специалисты</h1>
+            <div class="doctors-grid">
+                <div class="doctor-card">
+                    <div class="doctor-image">
+                        <img src="{{ url_for('static', filename='images/Эндокринолог.jpg') }}" alt="Эндокринолог">
+                    </div>
+                    <div class="doctor-info">
+                        <h3>Васильева Наталья Сергеевна</h3>
+                        <p>Эндокринолог</p>
+                        <p>Стаж: 12 лет</p>
+                        <p>Рейтинг: 4.6 из 5</p>
+                        <p>Посетителей: +120000</p>
+                        <p>Специалист в области эндокринологии, занимается лечением заболеваний щитовидной железы и диабета. Применяет индивидуальный подход к каждому пациенту.</p>
+                    </div>
+                </div>
+
+                <div class="doctor-card">
+                    <div class="doctor-image">
+                        <img src="{{ url_for('static', filename='images/Дерматолог.jpg') }}" alt="Дерматолог">
+                    </div>
+                    <div class="doctor-info">
+                        <h3>Кузнецова Анна Викторовна</h3>
+                        <p>Дерматолог</p>
+                        <p>Стаж: 10 лет</p>
+                        <p>Рейтинг: 4.5 из 5</p>
+                        <p>Посетителей: +100000</p>
+                        <p>Эксперт в лечении кожных заболеваний, включая акне и экзему. Использует современные методы терапии.</p>
+                    </div>
+                </div>
+
+                <div class="doctor-card">
+                    <div class="doctor-image">
+                        <img src="{{ url_for('static', filename='images/Отоларинголог.jpg') }}" alt="Отоларинголог">
+                    </div>
+                    <div class="doctor-info">
+                        <h3>Лебедев Алексей Михайлович</h3>
+                        <p>Отоларинголог</p>
+                        <p>Стаж: 14 лет</p>
+                        <p>Рейтинг: 4.7 из 5</p>
+                        <p>Посетителей: +140000</p>
+                        <p>Специализируется на лечении заболеваний уха, горла и носа. Имеет опыт работы с пациентами всех возрастов.</p>
+                    </div>
+                </div>
+
+                <div class="doctor-card">
+                    <div class="doctor-image">
+                        <img src="{{ url_for('static', filename='images/Офтальмолог.jpg') }}" alt="Офтальмолог">
+                    </div>
+                    <div class="doctor-info">
+                        <h3>Смирнова Елена Дмитриевна</h3>
+                        <p>Офтальмолог</p>
+                        <p>Стаж: 16 лет</p>
+                        <p>Рейтинг: 4.8 из 5</p>
+                        <p>Посетителей: +160000</p>
+                        <p>Профессионал в области диагностики и лечения заболеваний глаз. Применяет новейшие технологии в офтальмологии.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<div id="appointmentModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h2>Запись на прием</h2>
+        <form id="appointmentForm" onsubmit="submitForm(event)">
+            <div class="form-group">
+                <label for="policy">Полис:</label>
+                <input type="text" id="policy" name="policy" required>
+            </div>
+            <div class="form-group">
+                <label for="specialist">Специалист:</label>
+                <select id="specialist" name="specialist" required>
+                    <option value="Терапевт">Терапевт</option>
+                    <option value="Кардиолог">Кардиолог</option>
+                    <option value="Невролог">Невролог</option>
+                    <option value="Вакцинация">Вакцинация</option>
+                    <option value="Эндокринолог">Эндокринолог</option>
+                    <option value="Дерматолог">Дерматолог</option>
+                    <option value="Отоларинголог">Отоларинголог</option>
+                    <option value="Офтальмолог">Офтальмолог</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="appointmentDate">Дата:</label>
+                <input type="date" id="appointmentDate" name="appointmentDate" required>
+            </div>
+            <div class="form-group">
+                <label for="appointmentTime">Время:</label>
+                <select id="appointmentTime" name="appointmentTime" required>
+                    <option value="">Выберите время</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Записаться</button>
+        </form>
+        <div id="successMessage" class="success-message" style="display: none;">
+            Вы успешно записаны на прием!
+        </div>
+    </div>
+</div>

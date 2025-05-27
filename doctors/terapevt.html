@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Терапевт - Иванов Иван Иванович</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav-container">
+            <div class="logo-container">
+                <div class="logo-circle">
+                    <img src="../images/Лого.jpg" alt="Логотип медицинского центра">
+                </div>
+                <div class="organization-name">
+                    <span class="medical-cross">+</span>
+                    Медицинская организация<br>им. Щадова
+                </div>
+            </div>
+            <div class="nav-menu">
+                <a href="../index.html" class="nav-link">Главная</a>
+                <a href="../index.html#services" class="nav-link">Услуги</a>
+                <a href="../index.html#doctors" class="nav-link">Врачи</a>
+                <a href="../index.html#contact" class="nav-link">Контакты</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="doctor-profile">
+        <div class="container">
+            <div class="doctor-header">
+                <img src="../images/Терапевт.jpg" alt="Иванов Иван Иванович" class="doctor-photo">
+                <button class="cta-button" onclick="openModal('Терапевт')">
+                    <i class="fas fa-plus medical-cross-btn"></i>
+                    Записаться на прием
+                    <i class="fas fa-plus medical-cross-btn"></i>
+                </button>
+                <div class="doctor-info">
+                    <h1>Иванов Иван Иванович</h1>
+                    <p class="doctor-title">Главный врач, терапевт</p>
+                    <div class="doctor-stats">
+                        <div class="stat">
+                            <span class="number">15+</span>
+                            <span class="label">Лет опыта</span>
+                        </div>
+                        <div class="stat">
+                            <span class="number">1000+</span>
+                            <span class="label">Пациентов</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <section class="doctor-details">
+                <h2>О враче</h2>
+                <p>Иванов Иван Иванович - опытный терапевт с более чем 15-летним стажем работы. Специализируется на диагностике и лечении широкого спектра заболеваний внутренних органов.</p>
+                
+                <h2>Образование</h2>
+                <ul>
+                    <li>2005 - Первый Московский государственный медицинский университет имени И.М. Сеченова</li>
+                    <li>2007 - Ординатура по специальности "Терапия"</li>
+                    <li>2015 - Профессиональная переподготовка "Организация здравоохранения"</li>
+                </ul>
+
+                <h2>Специализация</h2>
+                <ul>
+                    <li>Диагностика и лечение заболеваний внутренних органов</li>
+                    <li>Профилактическая медицина</li>
+                    <li>Лечение хронических заболеваний</li>
+                    <li>Реабилитация после перенесенных заболеваний</li>
+                </ul>
+            </section>
+        </div>
+    </main>
+
+    <script src="../js/script.js"></script>
+</body>
+</html>

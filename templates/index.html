@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Медицинский центр</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        .hero {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            position: absolute;
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: #fff;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        .hero-content h1 {
+            font-size: 3em;
+            margin-bottom: 0.5em;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .hero-content h2 {
+            font-size: 1.5em;
+            margin-bottom: 1em;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .btn-primary {
+            padding: 10px 20px;
+            background-color: #2498db;
+            color: #fff;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .btn-primary:hover {
+            background-color: #3980b9;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .btn-more {
+            margin-top: 20px;
+        }
+        
+        .services-grid {
+            display: flex;
+            justify-content: space-around;
+            align-items: stretch;
+            flex-wrap: wrap;
+        }
+
+        .service-card {
+            flex: 1 1 30%;
+            max-width: 30%;
+            box-sizing: border-box;
+            padding: 10px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .service-card img {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 8px;
+            display: block;
+            margin: 0 auto 10px;
+        }
+
+        .centered-section {
+            text-align: center;
+            margin: 40px 0;
+        }
+        
+        .hero-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .hero-text {
+            max-width: 50%;
+        }
+
+        .hero-image {
+            max-width: 45%;
+        }
+
+        .hero-image img {
+            width: 100%;
+            border-radius: 8px;
+        }
+
+        .auth-link {
+            color: #3498db;
+        }
+
+        .auth-link:hover {
+            color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav-container">
+            <div class="logo-container">
+                <div class="logo-circle">
+                    <img src="{{ url_for('static', filename='images/Лого.jpg') }}" alt="Логотип медицинского центра">
+                </div>
+                <div class="organization-name">
+                     ОГБУЗ "Черемховская  <br> городская больница №1
+                </div>
+            </div>
+            <div class="nav-menu">
+                <a href="services.html" class="nav-link">Здоровый образ жизни</a>
+                <a href="#specialists" class="nav-link">Врачи</a>
+                <a href="#about" class="nav-link">О нас</a>
+                <a href="#contact" class="nav-link">Контакты</a>
+                {% if username %}
+                    <span class="nav-link">Пользователь: {{ username }}</span>
+                    <a href="/logout" class="nav-link">Выйти</a>
+                {% else %}
+                    <a href="/login" class="auth-link">Вход</a>
+                    <a href="/register" class="auth-link">Регистрация</a>
+                {% endif %}
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-background">
+            <img src="{{ url_for('static', filename='images/Главная картинка.jpg') }}" alt="Медицинский центр">
+        </div>
+        <div class="hero-content" style="top: 15%;">
+            <h1>Ваше здоровье - наш приоритет</h1>
+            <h2>Профессиональная медицинская помощь с заботой о каждом пациенте</h2>
+            <a href="#specialists" class="btn btn-primary">Записаться на прием</a>
+        </div>
+    </section>
+
+    <section class="centered-section">
+        <div class="container" style="display: flex; flex-direction: column; align-items: center;">
+            <h2>Профессиональная медицинская помощь с заботой о каждом пациенте</h2>
+        </div>
+    </section>
+
+    <section class="services">
+        <div class="container">
+            <div class="services-grid">
+                <div class="service-card">
+                    <img src="{{ url_for('static', filename='images/профилактика.jpg') }}" alt="Профилактика заболеваний">
+                    <h3>Профилактика заболеваний</h3>
+                    <p>Регулярные медицинские осмотры помогают выявить заболевания на ранней стадии. Рекомендуется проходить профилактический осмотр не реже 1 раза в год.</p>
+                </div>
+                <div class="service-card">
+                    <img src="{{ url_for('static', filename='images/Здоровый_образ.jpg') }}" alt="Здоровый образ жизни">
+                    <h3>Здоровый образ жизни</h3>
+                    <p>Правильное питание, регулярные физические нагрузки и отказ от вредных привычек - ключ к долгой и здоровой жизни.</p>
+                    <a href="services.html" class="btn btn-primary btn-more">Узнать больше</a>
+                </div>
+                <div class="service-card">
+                    <img src="{{ url_for('static', filename='images/вакцинация.jpg') }}" alt="Вакцинация">
+                    <h3>Вакцинация</h3>
+                    <p>Вакцинация - эффективный способ защиты от инфекционных заболеваний. Узнайте больше о доступных вакцинах и запишитесь на прием.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="specialists" class="specialists">
+        <div class="container">
+            <h2 class="section-title">Наши специалисты</h2>
+            <div class="specialists-grid">
+                <div class="specialist-card">
+                    <div class="specialist-image">
+                        <img src="{{ url_for('static', filename='images/Терапевт.jpg') }}" alt="Терапевт">
+                    </div>
+                    <h3>Терапевт</h3>
+                    <p>Иванов Иван Иванович</p>
+                    <p>Стаж: 15 лет</p>
+                    <p>Рейтинг: 4.8 из 5</p>
+                </div>
+                <div class="specialist-card">
+                    <div class="specialist-image">
+                        <img src="{{ url_for('static', filename='images/Кардиолог.jpg') }}" alt="Кардиолог">
+                    </div>
+                    <h3>Кардиолог</h3>
+                    <p>Петров Петр Петрович</p>
+                    <p>Стаж: 20 лет</p>
+                    <p>Рейтинг: 4.9 из 5</p>
+                </div>
+                <div class="specialist-card">
+                    <div class="specialist-image">
+                        <img src="{{ url_for('static', filename='images/Невролог.jpg') }}" alt="Невролог">
+                    </div>
+                    <h3>Невролог</h3>
+                    <p>Сидоров Сидор Сидорович</p>
+                    <p>Стаж: 18 лет</p>
+                    <p>Рейтинг: 4.7 из 5</p>
+                </div>
+                <a href="other-doctors.html" class="specialist-card">
+                    <div class="specialist-image">
+                        <img src="/static/images/Другие.jpg" alt="Другие специалисты">
+                    </div>
+                    <h3>Другие специалисты</h3>
+                    <p>Записаться к другим врачам нашего центра</p>
+                </a>
+            </div>
+            <div id="appointment" class="appointment-section" style="text-align: center; margin-top: 20px;">
+                <button onclick="openModal()" class="btn" style="width: 250px; background-color: green; color: white; border: none; padding: 10px 20px; font-size: 16px;">Записаться на прием</button>
+                {% include 'modal.html' %}
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="section about">
+        <div class="container">
+            <h2>О нас</h2>
+            <div class="about-content">
+                <p>Медицинская организация им. Щадова - это современный медицинский центр, оснащенный передовым оборудованием и укомплектованный высококвалифицированными специалистами.</p>
+                <p>Наша миссия - обеспечить каждого пациента качественной медицинской помощью, используя индивидуальный подход и современные методы диагностики и лечения.</p>
+                <div class="about-features">
+                    <div class="feature">
+                        <i class="fas fa-user-md"></i>
+                        <h3>Опытные специалисты</h3>
+                        <p>Врачи высшей категории с многолетним опытом работы</p>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-clock"></i>
+                        <h3>Удобный график</h3>
+                        <p>Гибкое расписание и оперативная запись на прием</p>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-heart"></i>
+                        <h3>Забота о пациентах</h3>
+                        <p>Внимательное отношение к каждому пациенту</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="section contact">
+        <div class="container">
+            <h2>Контактная информация</h2>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <h3>Телефон для связи</h3>
+                    <p>+7 (XXX) XXX-XX-XX</p>
+                    <p>Пн-Пт: 8:00 - 20:00</p>
+                    <p>Сб-Вс: 9:00 - 17:00</p>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <h3>Email</h3>
+                    <p>info@medical-center.ru</p>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <h3>Адрес</h3>
+                    <p>г. Черемхово, ул. Ленина, д. 28</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="policy">
+        <div class="policy-video-background">
+            <video autoplay muted loop playsinline>
+                <source src="{{ url_for('static', filename='videos/medical-background.mp4') }}" type="video/mp4">
+            </video>
+        </div>
+        <div class="policy-content">
+            <h2><button onclick="window.location.href='creator.html'" class="easter-egg">©</button>Политика конфиденциальности</h2>
+            <div class="policy-text">
+                <p>Мы гарантируем безопасность и конфиденциальность ваших персональных данных</p>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        console.log("Full Name from session:", '{{ session.get('full_name', '') }}');
+        console.log("Phone from session:", '{{ session.get('phone', '') }}');
+    </script>
+
+    <script>
+        // Открываем модальное окно и заполняем данными из сессии
+        function openModal() {
+            // const modal = document.getElementById('appointmentModal');
+            // modal.style.display = 'block';
+            // document.getElementById('specialist').value = specialist;
+
+            // Генерируем временные слоты
+            // generateTimeSlots();
+        }
+
+        // Закрываем модальное окно
+        function closeModal() {
+            // const modal = document.getElementById('appointmentModal');
+            // modal.style.display = 'none';
+            // document.getElementById('appointmentForm').reset();
+        }
+
+        // Генерация временных слотов
+        function generateTimeSlots() {
+            // const timeSelect = document.getElementById('appointmentTime');
+            // timeSelect.innerHTML = '<option value="">Выберите время</option>';
+            // for (let hour = 8; hour < 17; hour++) {
+            //     const time = `${hour.toString().padStart(2, '0')}:00`;
+            //     timeSelect.innerHTML += `<option value="${time}">${time}</option>`;
+            // }
+        }
+    </script>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

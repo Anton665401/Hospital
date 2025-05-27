@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Записи на прием</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <h2>Записи на прием</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Полис</th>
+                <th>Врач</th>
+                <th>Дата</th>
+                <th>Время</th>
+                <th>Действия</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for appointment in appointments %}
+            <tr>
+                <td>{{ appointment['id'] }}</td>
+                <td>{{ appointment['policy'] }}</td>
+                <td>{{ appointment['doctor'] }}</td>
+                <td>{{ appointment['date'] }}</td>
+                <td>{{ appointment['time'] }}</td>
+                <td>
+                    <a href="/edit_appointment/{{ appointment['id'] }}">Редактировать</a>
+                    <form action="/delete_appointment/{{ appointment['id'] }}" method="post" style="display:inline;">
+                        <button type="submit">Удалить</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

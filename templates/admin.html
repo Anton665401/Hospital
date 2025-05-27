@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <style>
+        .loading-screen video {
+            width: 80%;
+            max-width: 600px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .loading-bar {
+            width: 80%;
+            max-width: 600px;
+            height: 20px;
+            background-color: #333;
+            border-radius: 10px;
+            overflow: hidden;
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .binary-text {
+            color: #00ff00;
+            font-size: 3rem;
+            font-family: monospace;
+            text-align: center;
+            position: absolute;
+            top: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        tr:hover {
+            background-color: #ddd;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+    </style>
+</head>
+<body class="admin-panel">
+    <div class="loading-screen" id="loadingScreen">
+        <div class="binary-text">0 1 0 1 0 1</div>
+        <video src="{{ url_for('static', filename='videos/Hacker.mp4') }}" autoplay muted loop></video>
+        <div class="loading-bar">
+            <div class="loading-bar-progress"></div>
+        </div>
+    </div>
+    <h2>Admin Panel</h2>
+    <a href="{{ url_for('logout') }}" class="logout-button">Logout</a>
+    <h2>Пользователи и их записи на прием</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>ФИО</th>
+                <th>Логин</th>
+                <th>Майл</th>
+                <th>Телефон</th>
+                <th>Пароль</th>
+                <th>Действия</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% set displayed_appointments = [] %}
+            {% for user in users %}
+            <tr>
+                <td>{{ "{:08d}".format(user['id']) }}</td>
+                <td>{{ user['full_name'] }}</td>
+                <td>{{ user['username'] }}</td>
+                <td>{{ user['email'] }}</td>
+                <td>{{ user['phone'] }}</td>
+                <td>{{ user['password'] }}</td>
+                <td>
+                    <form action="/delete_user/{{ user['id'] }}" method="post" style="display:inline;">
+                        <button type="submit">Удалить аккаунт</button>
+                    </form>
+                </td>
+            </tr>
+            {% for appointment in appointments if appointment['user_id'] == user['id'] and appointment['id'] not in displayed_appointments %}
+            <tr>
+                <td colspan="7" style="padding-left: 40px;">
+                    Полис: {{ appointment['policy'] }}, Врач: {{ appointment['doctor'] }}, Дата: {{ appointment['date'] }}, Время: {{ appointment['time'] }}
+                    <form action="/delete_appointment/{{ appointment['id'] }}" method="post" style="display:inline;">
+                        <button type="submit">Удалить</button>
+                    </form>
+                </td>
+            </tr>
+            {% set displayed_appointments = displayed_appointments + [appointment['id']] %}
+            {% endfor %}
+            {% endfor %}
+        </tbody>
+    </table>
+    <script>
+        function editField(field, userId) {
+            // Логика для редактирования конкретного поля
+            console.log(`Редактировать ${field} пользователя с ID: ${userId}`);
+            // Здесь можно добавить логику для открытия модального окна или инлайн редактирования
+        }
+    </script>
+    <script>
+        window.onload = function() {
+            const loadingScreen = document.getElementById('loadingScreen');
+            loadingScreen.classList.add('active');
+            setTimeout(() => {
+                loadingScreen.classList.remove('active');
+            }, 5000);
+        };
+
+        function clearAllAppointments() {
+            // Send a request to delete all appointments
+            // This part is not implemented, you need to add the logic to delete all appointments
+            console.log('Clear all appointments');
+        }
+
+        function searchById() {
+            // Add the logic to search by user ID
+            console.log('Search by ID');
+        }
+
+        function editUser(userId) {
+            // Логика для открытия формы редактирования
+            console.log('Редактировать пользователя с ID:', userId);
+            // Здесь можно добавить логику для открытия модального окна
+        }
+    </script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

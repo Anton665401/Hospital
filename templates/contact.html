@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Контакты - Медицинский центр</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav-container">
+            <div class="logo-container">
+                <div class="logo-circle">
+                    <img src="images/Лого.jpg" alt="Логотип медицинского центра">
+                </div>
+                <div class="organization-name">
+                    Медицинская организация<br>им. Щадова
+                </div>
+            </div>
+            <div class="nav-menu">
+                <a href="services.html" class="nav-link">Услуги</a>
+                <a href="index.html#doctors" class="nav-link">Врачи</a>
+                <a href="about.html" class="nav-link">О нас</a>
+                <a href="contact.html" class="nav-link active">Контакты</a>
+            </div>
+        </nav>
+    </header>
+
+    <section class="section contact-page">
+        <div class="container">
+            <h1>Контактная информация</h1>
+            
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <div class="contact-card">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <h3>Адрес</h3>
+                        <p>г. Черемхово, ул. Ленина, 28</p>
+                    </div>
+                    <div class="contact-card">
+                        <i class="fas fa-phone"></i>
+                        <h3>Телефон</h3>
+                        <p>+7 (999) 123-45-67</p>
+                        <p>+7 (999) 765-43-21</p>
+                    </div>
+                    <div class="contact-card">
+                        <i class="fas fa-clock"></i>
+                        <h3>Время работы</h3>
+                        <p>Пн-Пт: 8:00 - 20:00</p>
+                        <p>Сб: 9:00 - 17:00</p>
+                        <p>Вс: выходной</p>
+                    </div>
+                    <div class="contact-card">
+                        <i class="fas fa-envelope"></i>
+                        <h3>Email</h3>
+                        <p>info@medcenter.ru</p>
+                    </div>
+                </div>
+
+                <div class="contact-form-container">
+                    <h2>Напишите нам</h2>
+                    <form class="contact-form">
+                        <div class="form-group">
+                            <label for="name">Ваше имя</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Телефон</label>
+                            <input type="tel" id="phone" name="phone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Сообщение</label>
+                            <textarea id="message" name="message" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="submit-button">
+                            <i class="fas fa-paper-plane"></i>
+                            Отправить сообщение
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="map-section">
+        <div class="container">
+            <h2>Как нас найти</h2>
+            <div class="map-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2411.533800336724!2d103.0839963!3d52.7647128!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x5d06460c8d52ed75%3A0x620a19f01514f8e9!2z0YPQuy4g0JvQtdC90LjQvdCwLCAyOCwg0KfQtdGA0LXQvNGF0L7QstC-LCDQmNGA0LrRg9GC0YHQutCw0Y8g0L7QsdC7LiwgNjY1NDE1!5e0!3m2!1sru!2sru!4v1710425162043!5m2!1sru!2sru" 
+                    width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
